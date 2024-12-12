@@ -4,8 +4,29 @@ let tasks = document.querySelector(".tasks");
 let postBtn = document.querySelector(".postBtn");
 let updateBtn = document.querySelector(".updateBtn");
 let error = document.querySelector(".error");
+
+
+document.querySelector(".container").insertBefore(searchContainer, allPost);
+
+let searchInput = document.querySelector(".search-input");
+let searchBtn = document.querySelector(".search-btn");
+
 let arr = [];
 let indexStore;
+
+searchBtn.addEventListener("click", function() {
+    let searchTerm = searchInput.value.toLowerCase().trim();
+    if (searchTerm === "") {
+        allPost.innerHTML = "";
+        display(arr);
+        return;
+    }
+    let filteredTasks = arr.filter(item => 
+        item.tasks.toLowerCase().includes(searchTerm)
+    );
+    allPost.innerHTML = "";
+    display(filteredTasks);
+});
 
 postBtn.addEventListener("click", function() {
     error.innerHTML = "";
@@ -51,8 +72,10 @@ updateBtn.addEventListener("click", function() {
     tasks.value = "";
 });
 
-function display() {
-    arr.forEach((item, index) => {
+function display(tasksToDisplay = arr) {
+    allPost.innerHTML = "";
+
+    tasksToDisplay.forEach((item, index) => {
         allPost.innerHTML += `
         <div class="card task-card">
             <div class="card-body">
@@ -84,23 +107,24 @@ function display() {
                             <span class="share-count">0</span>
                         </div>
                     </div>
-                    <div class="additional-actions">
-                        <button class="btn btn-sm btn-outline-secondary me-2 edit-task">
-                            <i class="fas fa-edit"></i>
-                        </button>
-                        <button class="btn btn-sm btn-outline-danger delete-task">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </div>
                 </div>
             </div>
         </div>
         `;
     });
 
+    attachEventListeners(tasksToDisplay);
+}
+
+function attachEventListeners(currentTasks) {
     document.querySelectorAll('.dlt').forEach((btn, index) => {
         btn.addEventListener('click', function() {
-            arr.splice(index, 1);
+            let originalIndex = arr.findIndex(task => 
+                task.name === currentTasks[index].name && 
+                task.tasks === currentTasks[index].tasks
+            );
+            
+            arr.splice(originalIndex, 1);
             allPost.innerHTML = "";
             display();
         });
@@ -108,14 +132,18 @@ function display() {
 
     document.querySelectorAll('.edt').forEach((btn, index) => {
         btn.addEventListener('click', function() {
-            tname.value = arr[index].name;
-            tasks.value = arr[index].tasks;
+            let originalIndex = arr.findIndex(task => 
+                task.name === currentTasks[index].name && 
+                task.tasks === currentTasks[index].tasks
+            );
+            
+            tname.value = currentTasks[index].name;
+            tasks.value = currentTasks[index].tasks;
             
             updateBtn.style.display = "inline-block";
             postBtn.style.display = "none";
             
-            indexStore = index;
+            indexStore = originalIndex;
         });
     });
-
 }
