@@ -4,28 +4,42 @@ let tasks = document.querySelector(".tasks");
 let postBtn = document.querySelector(".postBtn");
 let updateBtn = document.querySelector(".updateBtn");
 let error = document.querySelector(".error");
-
-
-document.querySelector(".container").insertBefore(searchContainer, allPost);
-
 let searchInput = document.querySelector(".search-input");
 let searchBtn = document.querySelector(".search-btn");
+let resetSearchBtn = document.querySelector(".reset-search-btn");
 
 let arr = [];
 let indexStore;
-
-searchBtn.addEventListener("click", function() {
+searchBtn.addEventListener("click", searchPosts);
+resetSearchBtn.addEventListener("click", resetSearch);
+function searchPosts() {
     let searchTerm = searchInput.value.toLowerCase().trim();
     if (searchTerm === "") {
         allPost.innerHTML = "";
         display(arr);
         return;
     }
+
     let filteredTasks = arr.filter(item => 
-        item.tasks.toLowerCase().includes(searchTerm)
+        item.tasks.toLowerCase().includes(searchTerm) || item.name.toLowerCase().includes(searchTerm)
     );
+
     allPost.innerHTML = "";
     display(filteredTasks);
+}
+
+// reset search for all posts
+function resetSearch() {
+    searchInput.value = ""; // clear search input
+    allPost.innerHTML = ""; // clear current display
+    display(arr); // show all posts
+}
+
+// add search on Enter key
+searchInput.addEventListener("keyup", function(event) {
+    if (event.key === "Enter") {
+        searchPosts();
+    }
 });
 
 postBtn.addEventListener("click", function() {
@@ -71,7 +85,6 @@ updateBtn.addEventListener("click", function() {
     tname.value = "";
     tasks.value = "";
 });
-
 function display(tasksToDisplay = arr) {
     allPost.innerHTML = "";
 
@@ -91,7 +104,6 @@ function display(tasksToDisplay = arr) {
                     </div>
                 </div>
                 <p class="card-text">${item.tasks}</p>
-                
                 <div class="task-interactions mt-3 d-flex justify-content-between align-items-center border-top pt-2">
                     <div class="interaction-icons d-flex align-items-center">
                         <div class="love-action me-3">
