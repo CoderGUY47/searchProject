@@ -12,9 +12,10 @@
     <div class="container mt-5">
         <div class="post-container">
             <h1 class="profile">Profile</h1>
-            <div class="d-flex align-items-center mb-3">
-                <input type="text" class="form-control tname" placeholder="Nick Name">
-            </div>
+            <div class="row d-flex mb-3  g-3 align-items-center">
+                <div class="col-auto">
+                    <input type="text" class="form-control tname" placeholder="@username">
+                </div>
             <div class="d-flex input-area mb-3">
                 <!-- <img src="" class="profile-img me-3" alt="Profile"> -->
                  <div class="icon">
@@ -22,14 +23,15 @@
                  </div>
 
                 <textarea class="form-control tasks" rows="4" placeholder="What's happening?"></textarea>
-                <div class="input-icons">
-                    <i class="fas fa-image"></i>
-                    <i class="fas fa-smile"></i>
-                    <i class="fas fa-paperclip"></i>
-                </div>
             </div>
             
             <div class="d-flex justify-content-between">
+                <div class="input-icons ms-0">
+                    <i class="fa-solid fa-image"></i>
+                    <i class="fa-solid fa-camera"></i>
+                    <i class="fa-regular fa-face-smile-beam"></i>
+                    <i class="fa-solid fa-location-dot"></i>
+                </div>
                 <div class="error flex-grow-1 me-3"></div>
                 <div>
                     <button type="button" class="btn btn-primary postBtn me-2">Publish</button>
@@ -40,12 +42,14 @@
         <div class="search-container mb-3">
             <div class="input-group">
                 <input type="text" class="form-control search-input" placeholder="search via whole text in post">
-                <button class="btn btn-primary search-btn">
-                    <i class="fas fa-search"></i>
-                </button>
-                <button class="btn btn-secondary reset-search-btn">
-                    <i class="fas fa-refresh"></i>
-                </button>
+                <div class="resetSearch">
+                    <button class="btn search-btn">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                    <button class="btn reset-search-btn">
+                        <i class="fa-solid fa-retweet"></i>
+                    </button>
+                </div>
             </div>
         </div>
         <div class="allPost">
@@ -57,3 +61,4 @@
 
 </body>
 </html>
+

@@ -93,19 +93,24 @@ function display(tasksToDisplay = arr) {
         <div class="card task-card">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center mb-2">
-                    <h5 class="card-title mb-0">${item.name}</h5>
+                    <div class="userName">
+                        <i class="fa-sharp-duotone fa-solid fa-certificate"></i>
+                        <h5 class="card-title mb-0">@${item.name}</h5>
+                    </div>
                     <div class="task-actions">
+                        <button class="btn btn-sm btn-outline-primary me-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                            <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
+                            </svg>
+                        </button>                        
                         <button class="btn btn-sm btn-outline-primary edt me-2">
                             <i class="fas fa-edit"></i>
-                        </button>
-                        <button class="btn btn-sm btn-outline-danger dlt">
-                            <i class="fas fa-trash"></i>
                         </button>
                     </div>
                 </div>
                 <p class="card-text">${item.tasks}</p>
                 <div class="task-interactions mt-3 d-flex justify-content-between align-items-center border-top pt-2">
-                    <div class="interaction-icons d-flex align-items-center">
+                    <div class="interaction-icons d-flex align-items-center" style="column-gap: 111px; padding: 0 !important;">
                         <div class="love-action me-3">
                             <i class="far fa-heart me-1"></i>
                             <span class="love-count">0</span>
@@ -118,6 +123,9 @@ function display(tasksToDisplay = arr) {
                             <i class="fas fa-share-alt"></i>
                             <span class="share-count">0</span>
                         </div>
+                        <button class="btn btn-sm btn-outline-danger dlt me-2">
+                            <i class="fas fa-trash"></i>
+                        </button>
                     </div>
                 </div>
             </div>
